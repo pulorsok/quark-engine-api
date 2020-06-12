@@ -13,7 +13,7 @@ from flask import url_for
 from flask import send_from_directory
 from flask import send_file
 
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 from filehash import FileHash
 
@@ -28,7 +28,7 @@ ALLOWED_EXTENSIONS = {'apk'}
 app = Flask(__name__)
 
 
-cors = CORS(app, resource={r"/api/*": {"origin": "quark.xeo.tw"}})
+cors = CORS(app, resource={r"/api/*": {"origin": "http://quark.xeo.tw"}})
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['REPORT_FOLDER'] = "data/report/"
@@ -48,6 +48,7 @@ def allowed_file(filename):
 """ Router """
 
 @app.route('/')
+@cross_origin()
 def home():
     return render_template("index.html", static_folder="static" , title="Home")
 

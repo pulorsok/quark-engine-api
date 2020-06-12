@@ -18,6 +18,7 @@ click = "*"
 pipenv = "*"
 install = "*"
 androguard = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.8"

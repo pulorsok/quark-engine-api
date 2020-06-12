@@ -31,7 +31,13 @@ class ApkAnalysis:
 
     def analysis(self):
         
-        data = XRule(self.apk)
+
+        try:
+            data = XRule(self.apk)
+        except:
+            print("Error from decompile apk: {}".format(self.apk))
+            return "Error open apk"
+        
 
         # Load rules
         rules_list = os.listdir(RULE_PATH)

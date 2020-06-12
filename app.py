@@ -13,6 +13,8 @@ from flask import url_for
 from flask import send_from_directory
 from flask import send_file
 
+from flask_cors import CORS
+
 from filehash import FileHash
 
 from model.apk_analysis import ApkAnalysis
@@ -24,6 +26,9 @@ UPLOAD_FOLDER = "data/apk/"
 ALLOWED_EXTENSIONS = {'apk'}
 
 app = Flask(__name__)
+
+
+cors = CORS(app, resource={r"/api/*": {"origin": "quark.xeo.tw"}})
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['REPORT_FOLDER'] = "data/report/"
@@ -118,8 +123,14 @@ def upload_apk():
                 print("report exist") 
                 return redirect(url_for("json_report", tag=f_hash))
 
+
+
+            
             analysis = ApkAnalysis(f_hash, filename)
             report = analysis.analysis()
+
+            if report == "Error open apk":
+                return json()
 
 
             report_tag = report["sample"]

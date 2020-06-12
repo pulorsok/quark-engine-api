@@ -4,7 +4,7 @@ import json
 import sys
 from flask_flatpages import FlatPages
 from flask_frozen import Freezer
-from flask import Flask
+from flask import Flask, abort
 from flask import request
 from flask import render_template
 from flask import flash
@@ -45,7 +45,8 @@ def allowed_file(filename):
 
 @app.before_request
 def check():
-    if request.host_url != "http://quark.xeo.tw":
+
+    if request.host_url != "http://quark.xeo.tw/":
         abort(401)
 
 
@@ -167,4 +168,4 @@ if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == "build":
         freezer.freeze()
     else:
-        app.run(debug=True)
+        app.run(host="0.0.0.0", port=80)

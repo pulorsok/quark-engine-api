@@ -1,0 +1,21 @@
+{
+    "crime": "Hotspot Detection - Scanning wifi and get active network info",
+    "x1_permission": [
+        "android.permission.CHANGE_WIFI_STATE",
+        "android.permission.ACCESS_NETWORK_STATE"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/net/wifi/WifiManager",
+            "method": "startScan"
+        },
+        {
+            "class": "Landroid/net/ConnectivityManager",
+            "method": "getActiveNetworkInfo"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "d3623a24648cdadcab189b2c7bec118a2aa63ec5f84ef002eeef44ad5789481c4927bcd76be38bb9920120d6093321b208ea443598edd5c099e3526eefcf1553"
+    ]
+}

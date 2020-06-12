@@ -1,0 +1,25 @@
+{
+    "crime": "Hotspot Detection - Get active networks info and update the location of current device",
+    "x1_permission": [
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.ACCESS_COARSE_LOCATION"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/net/ConnectivityManager",
+            "method": "getActiveNetworkInfo"
+        },
+        {
+            "class": "Landroid/location/LocationManager",
+            "method": "requestLocationUpdates"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "83057e262e794c2c25a59c65d8604885b9dbe9f0880c38518752677508493e21fe63c27708347ae26b76bfed38992f5e0d67da8b273892a52339bba58c661105",
+        "e504a2d9ad661a9353844740a2c585a605243fe4bb29735bfbc21ebd608beea7b15463987092ad8f3a021b7a3c3af94a41b127d6538d0bf0870907d822ee8e6b",
+        "036d6dfe49a39e41cbfadab35d47650af851c02b97cbaeaa59f2f27a99924486522876c6c5966656fcea113aac8ed44b29432d622768ea2eb2fe302ff9ec79c8",
+        "72f0294c4e7015ae162492edbdbe078144e50583500dc842635f0ddc28a55c9550f1d81d3f799146d454174174537dcd3d8c0346bc6b6fe75d59b514b26ee352",
+        "d3623a24648cdadcab189b2c7bec118a2aa63ec5f84ef002eeef44ad5789481c4927bcd76be38bb9920120d6093321b208ea443598edd5c099e3526eefcf1553"
+    ]
+}

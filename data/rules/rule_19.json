@@ -1,0 +1,21 @@
+{
+    "crime": "Stealth and Steal Sensitive Information - Get the last known location and hide from GPS tracking",
+    "x1_permission": [
+        "android.permission.ACCESS_COARSE_LOCATION"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/location/LocationManager",
+            "method": "getLastKnownLocation"
+        },
+        {
+            "class": "Landroid/location/LocationManager",
+            "method": "removeUpdates"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "d3623a24648cdadcab189b2c7bec118a2aa63ec5f84ef002eeef44ad5789481c4927bcd76be38bb9920120d6093321b208ea443598edd5c099e3526eefcf1553",
+        "014b4e2e536d0f23dfefea6226932e25e76eaf0afa9ee7692f33a0573d6215080a74fabaad35daf0a5b639de554214290c67c802ac5aefd32469042f7ff069bf"
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "crime": "Steal Sensitive Information - Keep your device awake and get info from your SD cards",
+    "x1_permission": [
+        "android.permission.WAKE_LOCK",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/os/PowerManager",
+            "method": "newWakeLock"
+        },
+        {
+            "class": "Landroid/os/Environment",
+            "method": "getExternalStorageDirectory"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "8acfbc89fa1c760c4cffc6178863e5529d93347c29fa972af7072cb520f49956d55b7f88155671c1d02b54905ec09abd744314d3d4a13c790116583e18f8ebe6",
+        "398acd50a4931316d4c5270cfd4fbf56032565a5e4d7265eb29deb1595ccb5cf748667ab39fa02364669d217d871d5308b6a2ad7a9b7fafdda6abe709012d191",
+        "e3ce5a68b8a7d6a6119ba489b5108a146beb6aa3efb63c3f9493695ca634ae6e04b139b8f5df407f61914116d8c5abbe3d02f35f2d424e68da3b6df6a898eae0",
+        "73804c796f7ae285fdba3c08d0742c46d758024020cb6614f0a75182c5af3b721a952f6b436226317631b163701f18ed2a8b9df2694a48cf9ee8a321234bacb4",
+        "f4579b81e8cb6d19a5456bdad9215dfd01d06f24fc45b9474fff9264fcad2feddc9ebba4a02a858b26016faebd28e5623458578d0d24ed0312b75b5c2f516590"
+    ]
+}

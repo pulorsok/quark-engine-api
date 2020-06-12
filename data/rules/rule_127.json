@@ -1,0 +1,21 @@
+{
+    "crime": "Bluetooth Device Censoring - Check if the device is discovering bluetooth devices, if not, start discovering",
+    "x1_permission": [
+        "android.permission.BLUETOOTH",
+        "android.permission.BLUETOOTH_ADMIN"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/bluetooth/BluetoothAdapter",
+            "method": "isDiscovering"
+        },
+        {
+            "class": "Landroid/bluetooth/BluetoothAdapter",
+            "method": "startDiscovery"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "c111487d904e02f0c27bec07d61c100b4d1b1f145472fd0116f9dc9f21102dbb609415c4a8dd7b2e497b4d427a682a1f0b256c7562821b4a0e3a22e7e2096fb1"
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "crime": "Steal Sensitive Information - Get phone number and current network information",
+    "x1_permission": [
+        "android.permission.READ_PHONE_STATE",
+        "android.permission.ACCESS_NETWORK_STATE"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/telephony/TelephonyManager",
+            "method": "getLine1Number"
+        },
+        {
+            "class": "Landroid/net/ConnectivityManager",
+            "method": "getActiveNetworkInfo"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "954f6df7b4ce7f56232a797f7c5bc911a885e526ef92ca072060227ba97280fc4df3b8b605b99cfd24e1415718a630c174607e46ce0112eadf3c88151dd063d8",
+        "2d48ff0bbea51fc61aeb7dbae99f4252f65f8d37b0c949cec40bb788ebc6dfe6f8aa02ee12804d7fb34fdd5def7b28e2de9e66d282acf8f85750edfd3b90e9f2",
+        "94df58b777a539fa0574ab95fd4aa84c65c90977a0b9dfe21bf82544d9dd2a935b813ff2a3f85a9e749293309b6ce5459a3ec423870b737509eab0eaee50a5bf",
+        "014b4e2e536d0f23dfefea6226932e25e76eaf0afa9ee7692f33a0573d6215080a74fabaad35daf0a5b639de554214290c67c802ac5aefd32469042f7ff069bf",
+        "3b167d339e5a2027e39a8bfc55b4897ea55312e0ceee6b40903a02e33fecbd10e4c4d43ef1af36a262d01e78f352a3d6a13ecce3ed85d92c815201db8c8a7926",
+        "622821fb262951a2275c20b8fca4eac7c33a8044f0d984e054c3df4acf4da8a914058dc563d96f8f6985b1ac64d8cf93b1c54581e0c909a8011d69c6a740c739",
+        "d3623a24648cdadcab189b2c7bec118a2aa63ec5f84ef002eeef44ad5789481c4927bcd76be38bb9920120d6093321b208ea443598edd5c099e3526eefcf1553",
+        "22eb834fc059bd28d112e9eea74c328ed5b7e92059e65c97bdd203a767b51eed640d733682ef8012f1a08c4c4aa60d88bb28d6bb9147cb0d1fbd8e8d599fa041"
+    ]
+}

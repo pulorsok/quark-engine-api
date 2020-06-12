@@ -1,0 +1,22 @@
+{
+    "crime": "Steal Sensitive Information - Get all accounts on particular android device and current active networks",
+    "x1_permission": [
+        "android.permission.GET_ACCOUNTS",
+        "android.permission.ACCESS_NETWORK_STATE"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/accounts/AccountManager",
+            "method": "getAccountsByType"
+        },
+        {
+            "class": "Landroid/net/ConnectivityManager",
+            "method": "getActiveNetworkInfo"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "f25af098735e199971ec609b5af446908b63f859e04b47edd187331a8e8e1bf7658a0d26dde742b8f12989611b5a8051aea7e87fb4cbe4885476ba7d122d0015",
+        "6872a8d4b6d86182ae04be93e4681e3080358dd93cb86ea830edd4e664010342090bac47ffeb374c15fc806bca87a299e04713c0c1557c69a2fcadbff3b794ae"
+    ]
+}

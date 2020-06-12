@@ -1,0 +1,24 @@
+{
+    "crime": "Steal Sensitive Information - Check if the user is in the last known location",
+    "x1_permission": [
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/telephony/TelephonyManager",
+            "method": "getCellLocation"
+        },
+        {
+            "class": "Landroid/location/LocationManager",
+            "method": "getLastKnownLocation"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "a13228c19303304968541917fad261b12a00646e49a37eb61c5232f37aa18d91d2af913e66f2785067c9910ae74d51aa0d146523c6c6419bc027ea3dbb81288b",
+        "df792ff92b404ac843462a201c8356381176b1399128ac972d1cbfeb7b88b174f676e28342d149dc53565053f9a3605d6305036ba3a57653015f4c8aeaf802be",
+        "eb61a8e7dfc4ea33901803a669d6e8ef9d4a8cbb5217434208137f0b1b828f26bb49d07d92e7332a2b70903a0d206554de4300aac11070a02cf8d12e9ce53851",
+        "4f60446b97ce44b297e17e334de6d870f5de38ef1d74b2557f3bf684178363d319a5d0e4147f4cc55784e79a8f4eb2de0b6448fc103f5266b8c78b8bd2bca783"
+    ]
+}

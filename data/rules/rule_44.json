@@ -1,0 +1,21 @@
+{
+    "crime": "Stealth and Steal Sensitive Info - Hide from GPS tracking and get voice mail number ",
+    "x1_permission": [
+        "android.permission.READ_PHONE_STATE",
+        "android.permission.ACCESS_COARSE_LOCATION"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/telephony/TelephonyManager",
+            "method": "getVoiceMailNumber"
+        },
+        {
+            "class": "Landroid/location/LocationManager",
+            "method": "removeUpdates"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "fac704b9feffb8f284417b3abb27870e025d7675a5efa1cf6d63e465b5f5fcc2563848bbd042ebec42a4d7cf4736af1536f38bba4fb33dd35a258e6c6d2bf740"
+    ]
+}

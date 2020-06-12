@@ -1,0 +1,22 @@
+{
+    "crime": "?",
+    "x1_permission": [
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.VIBRATE"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/net/ConnectivityManager",
+            "method": "getActiveNetworkInfo"
+        },
+        {
+            "class": "Landroid/os/Vibrator",
+            "method": "vibrate"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "954f6df7b4ce7f56232a797f7c5bc911a885e526ef92ca072060227ba97280fc4df3b8b605b99cfd24e1415718a630c174607e46ce0112eadf3c88151dd063d8",
+        "4f60446b97ce44b297e17e334de6d870f5de38ef1d74b2557f3bf684178363d319a5d0e4147f4cc55784e79a8f4eb2de0b6448fc103f5266b8c78b8bd2bca783"
+    ]
+}

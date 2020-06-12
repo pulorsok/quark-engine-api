@@ -1,0 +1,23 @@
+{
+    "crime": "Steal Sensitive Information - Get SD cards and all network info",
+    "x1_permission": [
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.ACCESS_NETWORK_STATE"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/os/Environment",
+            "method": "getExternalStorageDirectory"
+        },
+        {
+            "class": "Landroid/net/ConnectivityManager",
+            "method": "getAllNetworkInfo"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "a13228c19303304968541917fad261b12a00646e49a37eb61c5232f37aa18d91d2af913e66f2785067c9910ae74d51aa0d146523c6c6419bc027ea3dbb81288b",
+        "94df58b777a539fa0574ab95fd4aa84c65c90977a0b9dfe21bf82544d9dd2a935b813ff2a3f85a9e749293309b6ce5459a3ec423870b737509eab0eaee50a5bf",
+        "e3ce5a68b8a7d6a6119ba489b5108a146beb6aa3efb63c3f9493695ca634ae6e04b139b8f5df407f61914116d8c5abbe3d02f35f2d424e68da3b6df6a898eae0"
+    ]
+}

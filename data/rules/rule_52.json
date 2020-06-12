@@ -1,0 +1,23 @@
+{
+
+    "crime": "Stealth and Steal Sensitive Info - Hide from GPS tracking and get phone number",
+    "x1_permission": [
+        "android.permission.READ_PHONE_STATE",
+        "android.permission.ACCESS_COARSE_LOCATION"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/telephony/TelephonyManager",
+            "method": "getLine1Number"
+        },
+        {
+            "class": "Landroid/location/LocationManager",
+            "method": "removeUpdates"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "fac704b9feffb8f284417b3abb27870e025d7675a5efa1cf6d63e465b5f5fcc2563848bbd042ebec42a4d7cf4736af1536f38bba4fb33dd35a258e6c6d2bf740",
+        "622821fb262951a2275c20b8fca4eac7c33a8044f0d984e054c3df4acf4da8a914058dc563d96f8f6985b1ac64d8cf93b1c54581e0c909a8011d69c6a740c739"
+    ]
+}

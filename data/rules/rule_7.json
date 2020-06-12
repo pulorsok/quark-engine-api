@@ -1,0 +1,23 @@
+{
+    "crime": "Steal Sensitive Information - Get current location and request an update to double check",
+    "x1_permission": [
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/telephony/TelephonyManager",
+            "method": "getCellLocation"
+        },
+        {
+            "class": "Landroid/location/LocationManager",
+            "method": "requestLocationUpdates"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "d3623a24648cdadcab189b2c7bec118a2aa63ec5f84ef002eeef44ad5789481c4927bcd76be38bb9920120d6093321b208ea443598edd5c099e3526eefcf1553",
+        "83057e262e794c2c25a59c65d8604885b9dbe9f0880c38518752677508493e21fe63c27708347ae26b76bfed38992f5e0d67da8b273892a52339bba58c661105",
+        "df792ff92b404ac843462a201c8356381176b1399128ac972d1cbfeb7b88b174f676e28342d149dc53565053f9a3605d6305036ba3a57653015f4c8aeaf802be"
+    ]
+}

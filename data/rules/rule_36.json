@@ -1,0 +1,31 @@
+{
+    "crime": "Steal Sensitive Information - Get SD cards info and your ISP info",
+    "x1_permission": [
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_PHONE_STATE"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/os/Environment",
+            "method": "getExternalStorageDirectory"
+        },
+        {
+            "class": "Landroid/telephony/TelephonyManager",
+            "method": "getNetworkType"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "f4579b81e8cb6d19a5456bdad9215dfd01d06f24fc45b9474fff9264fcad2feddc9ebba4a02a858b26016faebd28e5623458578d0d24ed0312b75b5c2f516590",
+        "398acd50a4931316d4c5270cfd4fbf56032565a5e4d7265eb29deb1595ccb5cf748667ab39fa02364669d217d871d5308b6a2ad7a9b7fafdda6abe709012d191",
+        "a13228c19303304968541917fad261b12a00646e49a37eb61c5232f37aa18d91d2af913e66f2785067c9910ae74d51aa0d146523c6c6419bc027ea3dbb81288b",
+        "83057e262e794c2c25a59c65d8604885b9dbe9f0880c38518752677508493e21fe63c27708347ae26b76bfed38992f5e0d67da8b273892a52339bba58c661105",
+        "3b167d339e5a2027e39a8bfc55b4897ea55312e0ceee6b40903a02e33fecbd10e4c4d43ef1af36a262d01e78f352a3d6a13ecce3ed85d92c815201db8c8a7926",
+        "da44a5bd5d6ddb74eff1751dd8ca5bef36c7246c5d166284f374328c7de59bb38977e0c3dee694d619bd8e2b28733cd2045b7d63657076c1d40f4a22343f8d73",
+        "4f60446b97ce44b297e17e334de6d870f5de38ef1d74b2557f3bf684178363d319a5d0e4147f4cc55784e79a8f4eb2de0b6448fc103f5266b8c78b8bd2bca783",
+        "d3623a24648cdadcab189b2c7bec118a2aa63ec5f84ef002eeef44ad5789481c4927bcd76be38bb9920120d6093321b208ea443598edd5c099e3526eefcf1553",
+        "934573215329244f74ad7090604d4410732559ea0c981c466d6dee13a2ba6b8533d9d7171af6f5fb7ae07377a495cee8b77e5da1dc1eca68158b3c76395f8b1c",
+        "bfbd18234345807597d828842a2f1afadaaca5994337a1f728e3c8736e6ebd787907c9b4e79f43fd95c169351ec5e52f0f45542f6c6a363806d86072b5118e5d",
+        "22eb834fc059bd28d112e9eea74c328ed5b7e92059e65c97bdd203a767b51eed640d733682ef8012f1a08c4c4aa60d88bb28d6bb9147cb0d1fbd8e8d599fa041"
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "crime": "Get path of external storage directory st wallpaper categories",
+    "x1_permission": [
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.SET_WALLPAPER"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/os/Environment",
+            "method": "getExternalStorageDirectory"
+        },
+        {
+            "class": "Landroid/app/WallpaperManager",
+            "method": "setBitmap"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "780b32eb5ed18d441338294662ec042781e6aa68e1a7e2f7e46671c152e4252be2b126cefb692b96442d34eff3ca2986a26e6eb6d336a7af16a63aafe34987ad"
+    ]
+}

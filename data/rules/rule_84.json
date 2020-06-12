@@ -1,0 +1,20 @@
+{
+    "crime": "Steal Sensitive Information - Get SD cards information",
+    "x1_permission": [
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/os/Environment",
+            "method": "getExternalStorageDirectory"
+        },
+        {
+            "class": "Landroid/content/Context",
+            "method": "getExternalCacheDir"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "e8314bce51a1aa84837f095066cb3bf04474b00868bf12f996e3249670a52b08923b422aa35a7a3b5a8b65bc91ef730d74fd2c19c644bc0e0cfe9fd1a89d5734"
+    ]
+}

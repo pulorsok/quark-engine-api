@@ -1,0 +1,21 @@
+{
+    "crime": "Stealth and Steal Sensitive Info - Get current location and hide vibration notification",
+    "x1_permission": [
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.VIBRATE"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/telephony/TelephonyManager",
+            "method": "getCellLocation"
+        },
+        {
+            "class": "Landroid/os/Vibrator",
+            "method": "cancel"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "d3623a24648cdadcab189b2c7bec118a2aa63ec5f84ef002eeef44ad5789481c4927bcd76be38bb9920120d6093321b208ea443598edd5c099e3526eefcf1553"
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "crime": "Get current network information and get wallpaper from device for sending wall paper of device via network",
+    "x1_permission": [
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.READ_EXTERNAL_STORAGE"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/net/ConnectivityManager",
+            "method": "getNetworkInfo"
+        },
+        {
+            "class": "Landroid/app/WallpaperManager",
+            "method": "getFastDrawable"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "40679ca32d188c994699c685f3c3969736985120e77d1ba482aa0a0b985788578af306371c2f1352ded3cc78e0b122f374d1d08ae58f6ac622f28044c5d14170"
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "crime": "Steal Sensitive Information - Get last and present locations",
+    "x1_permission": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/location/LocationManager",
+            "method": "getLastKnownLocation"
+        },
+        {
+            "class": "Landroid/telephony/TelephonyManager",
+            "method": "getCellLocation"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "eb61a8e7dfc4ea33901803a669d6e8ef9d4a8cbb5217434208137f0b1b828f26bb49d07d92e7332a2b70903a0d206554de4300aac11070a02cf8d12e9ce53851"
+    ]
+}

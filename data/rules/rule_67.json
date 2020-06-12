@@ -1,0 +1,21 @@
+{
+    "crime": "Resource Consumption and Steal Sensitive Info - Keep the device awake and get all network info",
+    "x1_permission": [
+        "android.permission.WAKE_LOCK",
+        "android.permission.ACCESS_NETWORK_STATE"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/os/PowerManager",
+            "method": "newWakeLock"
+        },
+        {
+            "class": "Landroid/net/ConnectivityManager",
+            "method": "getAllNetworkInfo"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "e3ce5a68b8a7d6a6119ba489b5108a146beb6aa3efb63c3f9493695ca634ae6e04b139b8f5df407f61914116d8c5abbe3d02f35f2d424e68da3b6df6a898eae0"
+    ]
+}

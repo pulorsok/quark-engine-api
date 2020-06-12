@@ -1,0 +1,21 @@
+{
+    "crime": "Steal Sensitive Information - Get info of all network and your ISP",
+    "x1_permission": [
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.READ_PHONE_STATE"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/net/ConnectivityManager",
+            "method": "getAllNetworkInfo"
+        },
+        {
+            "class": "Landroid/telephony/TelephonyManager",
+            "method": "getNetworkType"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "a13228c19303304968541917fad261b12a00646e49a37eb61c5232f37aa18d91d2af913e66f2785067c9910ae74d51aa0d146523c6c6419bc027ea3dbb81288b"
+    ]
+}

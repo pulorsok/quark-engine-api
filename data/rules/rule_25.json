@@ -1,0 +1,21 @@
+{
+    "crime": "Steal Sensitive Information - See what version of software people use in particular location",
+    "x1_permission": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.READ_PHONE_STATE"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/location/LocationManager",
+            "method": "requestLocationUpdates"
+        },
+        {
+            "class": "Landroid/telephony/TelephonyManager",
+            "method": "getDeviceSoftwareVersion"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "fac704b9feffb8f284417b3abb27870e025d7675a5efa1cf6d63e465b5f5fcc2563848bbd042ebec42a4d7cf4736af1536f38bba4fb33dd35a258e6c6d2bf740"
+    ]
+}

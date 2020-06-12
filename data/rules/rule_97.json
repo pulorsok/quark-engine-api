@@ -1,0 +1,21 @@
+{
+    "crime": "Change Settings - Enable bluetooth when it is disabled",
+    "x1_permission": [
+        "android.permission.BLUETOOTH_ADMIN",
+        "android.permission.BLUETOOTH"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/bluetooth/BluetoothAdapter",
+            "method": "disable"
+        },
+        {
+            "class": "Landroid/bluetooth/BluetoothAdapter",
+            "method": "isEnabled"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "facbc6729be9b6b0c99b96bb4907d8d2dae1becb794e2a0cb0067a1bb0cdfb929e2f9e081ceb5c04224db421e74ac38a64af8c2d062713f62923e7b8e792d7f5"
+    ]
+}

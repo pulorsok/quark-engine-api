@@ -1,0 +1,21 @@
+{
+    "crime": "Resource Comsumption - keep the phone awake when vibrate",
+    "x1_permission": [
+        "android.permission.VIBRATE",
+        "android.permission.WAKE_LOCK"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/os/Vibrator",
+            "method": "vibrate"
+        },
+        {
+            "class": "Landroid/os/PowerManager",
+            "method": "newWakeLock"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "c695ff37d9750449207042e50ff4279daea3b0eb9b20ddfc36b5e7df831b18c4e9d1fca6e165e7b1a8df7926238ccc42f88532ff252ea9e7c2fc86620fe0bf1a"
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "crime": "Hotspot Information Collection - Get the network providers' name and active networks",
+    "x1_permission": [
+        "android.permission.READ_PHONE_STATE",
+        "android.permission.ACCESS_NETWORK_STATE"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/telephony/TelephonyManager",
+            "method": "getNetworkType"
+        },
+        {
+            "class": "Landroid/net/ConnectivityManager",
+            "method": "getActiveNetworkInfo"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "7deee7286601890557a318986cf9642ed8426131147c4bbde8d5dc7651843a452b1bf3a7aef37048c110d4bee46e76fd4381fa0c29835350d2eeecc05fa60bd7",
+        "a13228c19303304968541917fad261b12a00646e49a37eb61c5232f37aa18d91d2af913e66f2785067c9910ae74d51aa0d146523c6c6419bc027ea3dbb81288b",
+        "83057e262e794c2c25a59c65d8604885b9dbe9f0880c38518752677508493e21fe63c27708347ae26b76bfed38992f5e0d67da8b273892a52339bba58c661105",
+        "da44a5bd5d6ddb74eff1751dd8ca5bef36c7246c5d166284f374328c7de59bb38977e0c3dee694d619bd8e2b28733cd2045b7d63657076c1d40f4a22343f8d73",
+        "40679ca32d188c994699c685f3c3969736985120e77d1ba482aa0a0b985788578af306371c2f1352ded3cc78e0b122f374d1d08ae58f6ac622f28044c5d14170",
+        "74f56e74a61e0526dc934e8a7a77356982e96cb2bc0fa2091adca088b51509b805cd4a94c1816014f9d635ad218d7989530c6501254a7476fa19a070894a4ffe",
+        "934573215329244f74ad7090604d4410732559ea0c981c466d6dee13a2ba6b8533d9d7171af6f5fb7ae07377a495cee8b77e5da1dc1eca68158b3c76395f8b1c",
+        "f4579b81e8cb6d19a5456bdad9215dfd01d06f24fc45b9474fff9264fcad2feddc9ebba4a02a858b26016faebd28e5623458578d0d24ed0312b75b5c2f516590"
+    ]
+}

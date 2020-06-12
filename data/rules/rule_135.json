@@ -1,0 +1,20 @@
+{
+    "crime": "Avoid Detection - Disable and enable GPS tracking in a low frequency",
+    "x1_permission": [
+        "android.permission.ACCESS_COARSE_LOCATION"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/location/LocationManager",
+            "method": "removeUpdates"
+        },
+        {
+            "class": "Landroid/location/LocationManager",
+            "method": "requestLocationUpdates"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "4f60446b97ce44b297e17e334de6d870f5de38ef1d74b2557f3bf684178363d319a5d0e4147f4cc55784e79a8f4eb2de0b6448fc103f5266b8c78b8bd2bca783"
+    ]
+}

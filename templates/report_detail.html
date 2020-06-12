@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Quark</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+	<link rel="stylesheet" href="{{url_for('static', filename='css/collapse/style.css')}}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+	<link rel="stylesheet" href="{{url_for('static', filename='css/toggle/style.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/report.css')}}">
+	<link rel="stylesheet" href="{{url_for('static', filename='css/score/style.css')}}">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="{{url_for('static', filename='js/main.js')}}" type="text/javascript"></script>
+	<script src="{{url_for('static', filename='js/report.js')}}" type="text/javascript"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{{url_for('static', filename='css/simple-search-bar/style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/circular-progress/style.css')}}">
+
+
+
+</head>
+
+<body style="overflow-y: scroll; overflow-x: hidden;">
+
+	<div id="container" class="warp">
+		<div id="head">
+			<a href="../index.html"><img class="logo" src="https://i.imgur.com/os4Va2t.png"></a>
+			<div class="right">
+				<nav class="the-nav">
+					<ul class="flex_nav">
+						<li><a class="currentpage" href="../index.html">Home</a></li>
+						<li><a class="hover" href="../about.html">About Us</a></li>
+						<li><a class="hover" href="../report_list.html">Reports</a>
+						<li><a class="hover" href="https://github.com/quark-engine/quark-engine" target="https://github.com/quark-engine/quark-engine">Github</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<span class="hint3" showhints="Score：75">
+		<div class="score" style="height:200px;">
+
+			<section class="container">
+
+			
+
+				<div id="circ-cont" data-pct="100">
+					<svg id="svg" width="200" height="200"  viewBox="-120 20 400 400" version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+						<circle r="120" cx="150" cy="150" fill="transparent" stroke-dashoffset="0"></circle>
+						<circle id="bar" r="120" cx="150" cy="150" fill="transparent" stroke-dasharray="753.98" stroke-dashoffset="0" style="stroke:#E51010"></circle>
+					</svg>
+
+					<img class="high" style="width: 90px; padding-top: 40px; padding-left: 25px;" src="https://i.imgur.com/6LH0QNP.png">
+
+
+			</section>
+
+
+		</div>
+
+			</span>
+
+		<table class="rtable">
+			<thead>
+				<tr>
+					<th style="width: 20%;">File Name</th>
+					<th style="width: 10%;">File Size</th>
+					<th style="width: 70%;">File Hash</td>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="fontW">
+					<td style="overflow: auto;">{{report["apk-name"]}}<img class="riskLevel" src="https://i.imgur.com/8Gzz7Od.png"></td>
+					<td style="overflow: auto;">
+                        {% if report["size"] > 1000000 %}
+                            {{ (report["size"]/1000000)|round|int}} MB
+                        {% elif report["size"] > 1000 %}
+                            {{ (report["size"]/1000)|round|int}} KB
+                        {% endif %}
+                    </td>
+					<td style="font-size: 11px; overflow: auto;">SHA512: {{report["sample"]}}</td>
+				</tr>
+
+
+			</tbody>
+		</table>
+
+
+
+		<div class="body main">
+			<div class="robertL">
+				<span class="hint" showhints="The Android robot is reproduced or modified from work created and shared by Google and used according to terms described in the Creative Commons 3.0 Attribution License.">
+					<img src="https://i.imgur.com/8dd9ymp.png"></span>
+			</div>
+
+			<div class="robertR">
+				<span class="hint2" showhints="The Android robot is reproduced or modified from work created and shared by Google and used according to terms described in the Creative Commons 3.0 Attribution License.">
+					<img src="https://i.imgur.com/stNkyI6.png"></span>
+			</div>
+
+			<div class="middle_nav">
+				<p class="report">Report  -  Potential Malicious Behavior Detected</p>
+                <div class="line"></div>
+                <div class="date">Last update: 05.06.2020</div>
+                <a class="download" href="{{url_for('download', tag=report['sample'])}}" target="_blank">JSON report download</a>
+				<div class="choose">
+					<select id="confidence">
+						<option value="confidence"> Confidence</option>
+						<option value="20" rel="icon-temperature">20%</option>
+						<option value="40">40%</option>
+						<option value="60">60%</option>
+						<option value="80">80%</option>
+						<option value="100">100%</option>
+						<option value="all">All</option>
+					</select>
+				</div>
+				<!-- <div class="wrap2">
+					<div class="search">
+						<input type="text" class="searchTerm" placeholder=" Search......">
+						<button type="submit" class="searchButton">
+							<i class="fa fa-search"></i>
+						</button>
+					</div>
+				</div> -->
+				<div class="close active">
+					<input type="checkbox" id="try" class="plus-minus" >
+				</div>
+			</div>
+
+			<div class="mainReport">
+				<div class="detail">
+					<div class="container2 container">
+						<div class="col-md-6 col-sm-6">
+
+							<div class="panel-group wrap" id="bs-collapse">
+                                
+                                {% for crime in report["crimes"]|sort(attribute='confidence', reverse=True) %}
+                                
+                                    <div class="panel{{crime['confidence']}}">
+
+                                        <div class="panel-heading">
+                                            <p class="name">{{crime["rule"]}}</p>
+                                            <h4 class="panel-title">
+
+                                                <a data-toggle="collapse" href="#{{loop.index0}}">
+
+                                                    {% if "Hotspot" in crime["rule"] or "hotspot" in crime["rule"] %}
+                                                        <i class="material-icons iconS">settings_remote</i>
+                                                    {% elif "Location" in crime["rule"] or "location" in crime["rule"] or "GPS" in crime["rule"] %}
+                                                        <i class="material-icons iconS">location_on</i>
+                                                    {% elif "Information" in crime["rule"] or "information" in crime["rule"] or "info" in crime["rule"] %}
+                                                        <i class="material-icons iconS">description</i>
+                                                    {% elif "file" in crime["rule"] or "File" in crime["rule"] %}
+                                                        <i class="material-icons iconS">file_copy</i>
+                                                    {% elif "sms" in crime["rule"] or "SMS" in crime["rule"] or "message" in crime["rule"] %}
+                                                        <i class="material-icons iconS">email</i>
+                                                    {% elif "Avoid" in crime["rule"] or "avoid" in crime["rule"] or "hide" in crime["rule"] %}
+                                                        <i class="material-icons iconS">visibility_off</i>
+                                                    {% else %}
+                                                        <i class="material-icons iconS">adb</i>
+                                                    {% endif %}
+                                                    <p class="margin_right">{{crime["confidence"]}}%</p>
+                                                </a>
+
+                                            </h4>
+                                        </div>
+                                        <div id="{{loop.index0}}" class="panel-collapse collapse in">
+                                            <div class="panel-body">
+
+                                                <div class="detailBar2">
+
+                                                    {% if crime["confidence"] == 100 %}
+                                                    <div class="pinkBar2 flip{{loop.index0}}_1">
+                                                        <p class="detailInf">Permission Request</p>
+                                                        <img id="my-img" src="https://i.imgur.com/212sxBe.png">
+                                                        <div class="detailDiv find-div-body inform{{loop.index0}}_1" id="collapseOne" class="panel-collapse collapse in">
+                                                            {% for p in crime["permissions"] %}
+                                                                {{p}}<br>
+                                                            {% endfor %}
+                                                        </div>
+                                                        <script>                                    
+                                                            $(function(){
+                                                            $(".flip{{loop.index0}}_1").mousedown(function(){
+                                                                $(".xs1").toggle();
+                                                                $(".xs2").toggle();
+                                                                $(".inform{{loop.index0}}_1").slideToggle(300);
+                                                            });});
+                                                        </script>
+                                                    </div>
+                                                    <div class="pinkBar2 flip{{loop.index0}}_2">
+                                                        <p class="detailInf ">Native API Usage</p>
+                                                        <img id="my-img2" src="https://i.imgur.com/lq3yt8u.png">
+                                                        <div class="detailDiv find-div-body inform{{loop.index0}}_2">                                                         
+                                                                class: {{crime["methods"][0]["class"]}}<br>
+                                                                method: {{crime["methods"][0]["method"]}}<br><br>
+                                                                class: {{crime["methods"][1]["class"]}}<br>
+                                                                method: {{crime["methods"][1]["method"]}}<br>
+                                                        </div>
+                                                        <script>                                    
+                                                            $(function(){
+                                                            $(".flip{{loop.index0}}_2").mousedown(function(){
+                                                                $(".xs1").toggle();
+                                                                $(".xs2").toggle();
+                                                                $(".inform{{loop.index0}}_2").slideToggle(300);
+                                                            });});
+                                                        </script>
+                                                    </div>
+                                                    <div class="pinkBar2 flip{{loop.index0}}_3">
+                                                        <p class="detailInf ">Native API Combination</p>
+                                                        <img id="my-img2" src="https://i.imgur.com/lq3yt8u.png">
+                                                        <div class="detailDiv find-div-body inform{{loop.index0}}_3">
+                                                            Yes                                                         
+                                                        </div>
+                                                        <script>                                    
+                                                            $(function(){
+                                                            $(".flip{{loop.index0}}_3").mousedown(function(){
+                                                                $(".xs1").toggle();
+                                                                $(".xs2").toggle();
+                                                                $(".inform{{loop.index0}}_3").slideToggle(300);
+                                                            });});
+                                                        </script>
+                                                    </div>
+                                                    <div class="pinkBar2 flip{{loop.index0}}_4">
+                                                        <p class="detailInf ">Native API Sequence</p>
+                                                        <img id="my-img2" src="https://i.imgur.com/lq3yt8u.png">
+                                                        <div class="detailDiv find-div-body inform{{loop.index0}}_4">
+                                                            Yes                                                         
+                                                        </div>
+                                                        <script>                                    
+                                                            $(function(){
+                                                            $(".flip{{loop.index0}}_4").mousedown(function(){
+                                                                $(".xs1").toggle();
+                                                                $(".xs2").toggle();
+                                                                $(".inform{{loop.index0}}_4").slideToggle(300);
+                                                            });});
+                                                        </script>
+                                                    </div>
+                                                    <div class="pinkBar2 flip{{loop.index0}}_5">
+                                                        <p class="detailInf ">Native API Use Same Parameter</p>
+                                                        <img id="my-img2" src="https://i.imgur.com/lq3yt8u.png">
+                                                        <div class="detailDiv find-div-body inform{{loop.index0}}_5">
+                                                            Yes                                                         
+                                                        </div>
+                                                        <script>                                    
+                                                            $(function(){
+                                                            $(".flip{{loop.index0}}_5").mousedown(function(){
+                                                                $(".xs1").toggle();
+                                                                $(".xs2").toggle();
+                                                                $(".inform{{loop.index0}}_5").slideToggle(300);
+                                                            });});
+                                                        </script>
+                                                    </div>
+                                                    {% endif %}
+
+                                                    {% if crime["confidence"] == 80 %}
+                                                    <div class="pinkBar2 flip{{loop.index0}}_1">
+                                                        <p class="detailInf">Permission Request</p>
+                                                        <img id="my-img" src="https://i.imgur.com/212sxBe.png">
+                                                        <div class="detailDiv find-div-body inform{{loop.index0}}_1" id="collapseOne" class="panel-collapse collapse in">
+                                                            {% for p in crime["permissions"] %}
+                                                                {{p}}<br>
+                                                            {% endfor %}
+                                                        </div>
+                                                        <script>                                    
+                                                            $(function(){
+                                                            $(".flip{{loop.index0}}_1").mousedown(function(){
+                                                                $(".xs1").toggle();
+                                                                $(".xs2").toggle();
+                                                                $(".inform{{loop.index0}}_1").slideToggle(300);
+                                                            });});
+                                                        </script>
+                                                    </div>
+                                                    <div class="pinkBar2 flip{{loop.index0}}_2">
+                                                        <p class="detailInf ">Native API Usage</p>
+                                                        <img id="my-img2" src="https://i.imgur.com/lq3yt8u.png">
+                                                        <div class="detailDiv find-div-body inform{{loop.index0}}_2">
+                                                                class: {{crime["methods"][0]["class"]}}<br>
+                                                                method: {{crime["methods"][0]["method"]}}<br><br>
+                                                                class: {{crime["methods"][1]["class"]}}<br>
+                                                                method: {{crime["methods"][1]["method"]}}<br>                                                         
+                                                        </div>
+                                                        <script>                                    
+                                                            $(function(){
+                                                            $(".flip{{loop.index0}}_2").mousedown(function(){
+                                                                $(".xs1").toggle();
+                                                                $(".xs2").toggle();
+                                                                $(".inform{{loop.index0}}_2").slideToggle(300);
+                                                            });});
+                                                        </script>
+                                                    </div>
+                                                    <div class="pinkBar2 flip{{loop.index0}}_3">
+                                                        <p class="detailInf ">Native API Combination</p>
+                                                        <img id="my-img2" src="https://i.imgur.com/lq3yt8u.png">
+                                                        <div class="detailDiv find-div-body inform{{loop.index0}}_3">
+                                                            Yes                                                         
+                                                        </div>
+                                                        <script>                                    
+                                                            $(function(){
+                                                            $(".flip{{loop.index0}}_3").mousedown(function(){
+                                                                $(".xs1").toggle();
+                                                                $(".xs2").toggle();
+                                                                $(".inform{{loop.index0}}_3").slideToggle(300);
+                                                            });});
+                                                        </script>
+                                                    </div>
+                                                    <div class="pinkBar2 flip{{loop.index0}}_4">
+                                                        <p class="detailInf ">Native API Sequence</p>
+                                                        <img id="my-img2" src="https://i.imgur.com/lq3yt8u.png">
+                                                        <div class="detailDiv find-div-body inform{{loop.index0}}_4">
+                                                            Yes                                                         
+                                                        </div>
+                                                        <script>                                    
+                                                            $(function(){
+                                                            $(".flip{{loop.index0}}_4").mousedown(function(){
+                                                                $(".xs1").toggle();
+                                                                $(".xs2").toggle();
+                                                                $(".inform{{loop.index0}}_4").slideToggle(300);
+                                                            });});
+                                                        </script>
+                                                    </div>
+                                                    <div class="pinkBar2">
+                                                        <p class="detailInf ">&nbsp</p>
+                                                        <img src="https://i.imgur.com/wwHbNgP.png">
+                                                    </div>
+                                                    {% endif %}
+                                                    {% if crime["confidence"] == 60 %}
+                                                    <div class="pinkBar2 flip{{loop.index0}}_1">
+                                                        <p class="detailInf">Permission Request</p>
+                                                        <img id="my-img" src="https://i.imgur.com/212sxBe.png">
+                                                        <div class="detailDiv find-div-body inform{{loop.index0}}_1" id="collapseOne" class="panel-collapse collapse in">
+                                                            {% for p in crime["permissions"] %}
+                                                                {{p}}<br>
+                                                            {% endfor %}
+                                                        </div>
+                                                        <script>                                    
+                                                            $(function(){
+                                                            $(".flip{{loop.index0}}_1").mousedown(function(){
+                                                                $(".xs1").toggle();
+                                                                $(".xs2").toggle();
+                                                                $(".inform{{loop.index0}}_1").slideToggle(300);
+                                                            });});
+                                                        </script>
+                                                    </div>
+                                                    <div class="pinkBar2 flip{{loop.index0}}_2">
+                                                        <p class="detailInf ">Native API Usage</p>
+                                                        <img id="my-img2" src="https://i.imgur.com/lq3yt8u.png">
+                                                        <div class="detailDiv find-div-body inform{{loop.index0}}_2">   
+                                                            class: {{crime["methods"][0]["class"]}}<br>
+                                                            method: {{crime["methods"][0]["method"]}}<br><br>
+                                                            class: {{crime["methods"][1]["class"]}}<br>
+                                                            method: {{crime["methods"][1]["method"]}}<br>                                                      
+                                                        </div>
+                                                        <script>                                    
+                                                            $(function(){
+                                                            $(".flip{{loop.index0}}_2").mousedown(function(){
+                                                                $(".xs1").toggle();
+                                                                $(".xs2").toggle();
+                                                                $(".inform{{loop.index0}}_2").slideToggle(300);
+                                                            });});
+                                                        </script>
+                                                    </div>
+                                                    <div class="pinkBar2 flip{{loop.index0}}_3">
+                                                        <p class="detailInf ">Native API Combination</p>
+                                                        <img id="my-img2" src="https://i.imgur.com/lq3yt8u.png">
+                                                        <div class="detailDiv find-div-body inform{{loop.index0}}_3">
+                                                            Yes                                                         
+                                                        </div>
+                                                        <script>                                    
+                                                            $(function(){
+                                                            $(".flip{{loop.index0}}_3").mousedown(function(){
+                                                                $(".xs1").toggle();
+                                                                $(".xs2").toggle();
+                                                                $(".inform{{loop.index0}}_3").slideToggle(300);
+                                                            });});
+                                                        </script>
+                                                    </div>
+                                                    <div class="pinkBar2">
+                                                        <p class="detailInf ">&nbsp</p>
+                                                        <img src="https://i.imgur.com/wwHbNgP.png">
+                                                    </div>
+                                                    <div class="pinkBar2">
+                                                        <p class="detailInf ">&nbsp</p>
+                                                        <img src="https://i.imgur.com/wwHbNgP.png">
+                                                    </div>
+                                                    {% endif %}
+
+                                                    {% if crime["confidence"] == 40 %}
+                                                    <div class="pinkBar2 flip{{loop.index0}}_1">
+                                                        <p class="detailInf">Permission Request</p>
+                                                        <img id="my-img" src="https://i.imgur.com/212sxBe.png">
+                                                        <div class="detailDiv find-div-body inform{{loop.index0}}_1" id="collapseOne" class="panel-collapse collapse in">
+                                                            {% for p in crime["permissions"] %}
+                                                                {{p}}<br>
+                                                            {% endfor %}
+                                                        </div>
+                                                        <script>                                    
+                                                            $(function(){
+                                                            $(".flip{{loop.index0}}_1").mousedown(function(){
+                                                                $(".xs1").toggle();
+                                                                $(".xs2").toggle();
+                                                                $(".inform{{loop.index0}}_1").slideToggle(300);
+                                                            });});
+                                                        </script>
+                                                    </div>
+                                                    <div class="pinkBar2 flip{{loop.index0}}_2">
+                                                        <p class="detailInf ">Native API Usage</p>
+                                                        <img id="my-img2" src="https://i.imgur.com/lq3yt8u.png">
+                                                        <div class="detailDiv find-div-body inform{{loop.index0}}_2">
+                                                            class: {{crime["methods"][0]["class"]}}<br>
+                                                            method: {{crime["methods"][0]["method"]}}<br><br>
+                                                            class: {{crime["methods"][1]["class"]}}<br>
+                                                            method: {{crime["methods"][1]["method"]}}<br>                                                         
+                                                        </div>
+                                                        <script>                                    
+                                                            $(function(){
+                                                            $(".flip{{loop.index0}}_2").mousedown(function(){
+                                                                $(".xs1").toggle();
+                                                                $(".xs2").toggle();
+                                                                $(".inform{{loop.index0}}_2").slideToggle(300);
+                                                            });});
+                                                        </script>
+                                                    </div>
+                                                    <div class="pinkBar2">
+                                                        <p class="detailInf ">&nbsp</p>
+                                                        <img src="https://i.imgur.com/wwHbNgP.png">
+                                                    </div>
+                                                    <div class="pinkBar2">
+                                                        <p class="detailInf ">&nbsp</p>
+                                                        <img src="https://i.imgur.com/wwHbNgP.png">
+                                                    </div>
+                                                    <div class="pinkBar2">
+                                                        <p class="detailInf ">&nbsp</p>
+                                                        <img src="https://i.imgur.com/wwHbNgP.png">
+                                                    </div>
+                                                    {% endif %}
+
+                                                    {% if crime["confidence"] == 20 %}
+                                                    <div class="pinkBar2 flip{{loop.index0}}_1">
+                                                        <p class="detailInf">Permission Request</p>
+                                                        <img id="my-img" src="https://i.imgur.com/212sxBe.png">
+                                                        <div class="detailDiv find-div-body inform{{loop.index0}}_1" id="collapseOne" class="panel-collapse collapse in">
+                                                            {% for p in crime["permissions"] %}
+                                                                {{p}}<br>
+                                                            {% endfor %}
+                                                        </div>
+                                                        <script>                                    
+                                                            $(function(){
+                                                            $(".flip{{loop.index0}}_1").mousedown(function(){
+                                                                $(".xs1").toggle();
+                                                                $(".xs2").toggle();
+                                                                $(".inform{{loop.index0}}_1").slideToggle(300);
+                                                            });});
+                                                        </script>
+                                                    </div>
+                                                    <div class="pinkBar2">
+                                                        <p class="detailInf ">&nbsp</p>
+                                                        <img src="https://i.imgur.com/wwHbNgP.png">
+                                                    </div>
+                                                    <div class="pinkBar2">
+                                                        <p class="detailInf ">&nbsp</p>
+                                                        <img src="https://i.imgur.com/wwHbNgP.png">
+                                                    </div>
+                                                    <div class="pinkBar2">
+                                                        <p class="detailInf ">&nbsp</p>
+                                                        <img src="https://i.imgur.com/wwHbNgP.png">
+                                                    </div>
+                                                    <div class="pinkBar2">
+                                                        <p class="detailInf ">&nbsp</p>
+                                                        <img src="https://i.imgur.com/wwHbNgP.png">
+                                                    </div>
+                                                    {% endif %}
+
+                                                   
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                {% endfor %}
+								
+
+								<!-- <div class="panel">
+									<div class="panel-heading">
+										<p class="name">Download files via http get</p>
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#" href="#four">
+												<img class="iconS" src="https://i.imgur.com/cVHGAtL.png">
+												<p class="margin_right">40%</p>
+											</a>
+										</h4>
+									</div>
+									<div id="four" class="panel-collapse collapse in">
+										<div class="panel-body">
+											<div class="detailBar2">
+												<div class="pinkBar2">
+													<p class="detailInf">Permission Request</p>
+													<img id="my-img" src="https://i.imgur.com/212sxBe.png">
+												</div>
+												<div class="pinkBar2">
+													<p class="detailInf ">Native API Usage</p>
+													<img id="my-img2" src="https://i.imgur.com/lq3yt8u.png">
+												</div>
+												<div class="pinkBar2">
+													<p class="detailInf ">&nbsp</p>
+													<img src="https://i.imgur.com/wwHbNgP.png">
+												</div>
+												<div class="pinkBar2">
+													<p class="detailInf ">&nbsp</p>
+													<img src="https://i.imgur.com/wwHbNgP.png">
+												</div>
+												<div class="pinkBar2">
+													<p class="detailInf "> &nbsp </p>
+													<img src="https://i.imgur.com/wwHbNgP.png">
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div> -->
+								<!-- end of panel -->
+
+							</div>
+							<!-- end of #bs-collapse  -->
+
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="foot">
+				<div class="dashB">
+					
+				</div>
+
+			</div>
+		</div>
+
+		<button type="button" id="BackTop" class="toTop-arrow"></button>
+		<script>
+			$(function() {
+				$('#BackTop').click(function() {
+					$('html,body').animate({
+						scrollTop: 0
+					}, 333);
+				});
+				$(window).scroll(function() {
+					if ($(this).scrollTop() > 100) {
+						$('#BackTop').fadeIn(222);
+					} else {
+						$('#BackTop').stop().fadeOut(222);
+					}
+				}).scroll();
+			});
+        </script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+        <script src="{{url_for('static', filename='js/circular-progress/script.js')}}"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+        <script src="{{url_for('static', filename='js/collapse/script.js')}}"></script>
+</body>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-168651268-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-168651268-1');
+</script>
+
+</html>

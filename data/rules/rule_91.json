@@ -1,0 +1,24 @@
+{
+    "crime": "Steal Sensitive Information - Get ISP info and the last known location of the device",
+    "x1_permission": [
+        "android.permission.READ_PHONE_STATE",
+        "android.permission.ACCESS_COARSE_LOCATION"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/telephony/TelephonyManager",
+            "method": "getNetworkType"
+        },
+        {
+            "class": "Landroid/location/LocationManager",
+            "method": "getLastKnownLocation"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "d3623a24648cdadcab189b2c7bec118a2aa63ec5f84ef002eeef44ad5789481c4927bcd76be38bb9920120d6093321b208ea443598edd5c099e3526eefcf1553",
+        "eb61a8e7dfc4ea33901803a669d6e8ef9d4a8cbb5217434208137f0b1b828f26bb49d07d92e7332a2b70903a0d206554de4300aac11070a02cf8d12e9ce53851",
+        "fac704b9feffb8f284417b3abb27870e025d7675a5efa1cf6d63e465b5f5fcc2563848bbd042ebec42a4d7cf4736af1536f38bba4fb33dd35a258e6c6d2bf740",
+        "a13228c19303304968541917fad261b12a00646e49a37eb61c5232f37aa18d91d2af913e66f2785067c9910ae74d51aa0d146523c6c6419bc027ea3dbb81288b"
+    ]
+}

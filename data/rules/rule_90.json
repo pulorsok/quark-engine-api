@@ -1,0 +1,23 @@
+{
+    "crime": "Steal Sensitive Information - Get ISP info and your phone number",
+    "x1_permission": [
+        "android.permission.READ_PHONE_STATE"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/telephony/TelephonyManager",
+            "method": "getNetworkType"
+        },
+        {
+            "class": "Landroid/telephony/TelephonyManager",
+            "method": "getLine1Number"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "3b167d339e5a2027e39a8bfc55b4897ea55312e0ceee6b40903a02e33fecbd10e4c4d43ef1af36a262d01e78f352a3d6a13ecce3ed85d92c815201db8c8a7926",
+        "934573215329244f74ad7090604d4410732559ea0c981c466d6dee13a2ba6b8533d9d7171af6f5fb7ae07377a495cee8b77e5da1dc1eca68158b3c76395f8b1c",
+        "2d48ff0bbea51fc61aeb7dbae99f4252f65f8d37b0c949cec40bb788ebc6dfe6f8aa02ee12804d7fb34fdd5def7b28e2de9e66d282acf8f85750edfd3b90e9f2",
+        "22eb834fc059bd28d112e9eea74c328ed5b7e92059e65c97bdd203a767b51eed640d733682ef8012f1a08c4c4aa60d88bb28d6bb9147cb0d1fbd8e8d599fa041"
+    ]
+}

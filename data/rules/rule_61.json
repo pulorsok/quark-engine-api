@@ -1,0 +1,21 @@
+{
+    "crime": "Change Settings and Steal Sensitive Info - Get your ISP name and enable wifi connection",
+    "x1_permission": [
+        "android.permission.READ_PHONE_STATE",
+        "android.permission.CHANGE_WIFI_STATE"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/telephony/TelephonyManager",
+            "method": "getNetworkType"
+        },
+        {
+            "class": "Landroid/net/wifi/WifiManager",
+            "method": "setWifiEnabled"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "a13228c19303304968541917fad261b12a00646e49a37eb61c5232f37aa18d91d2af913e66f2785067c9910ae74d51aa0d146523c6c6419bc027ea3dbb81288b"
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "crime": "Steal Sensitive Information - Get the last known location of the device and scanning available networks",
+    "x1_permission": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.CHANGE_WIFI_STATE"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/location/LocationManager",
+            "method": "getLastKnownLocation"
+        },
+        {
+            "class": "Landroid/net/wifi/WifiManager",
+            "method": "startScan"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "d3623a24648cdadcab189b2c7bec118a2aa63ec5f84ef002eeef44ad5789481c4927bcd76be38bb9920120d6093321b208ea443598edd5c099e3526eefcf1553"
+    ]
+}

@@ -1,0 +1,27 @@
+{
+    "crime": "Steal Sensitive Information - Get active network info and the last known location",
+    "x1_permission": [
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.ACCESS_COARSE_LOCATION"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/net/ConnectivityManager",
+            "method": "getActiveNetworkInfo"
+        },
+        {
+            "class": "Landroid/location/LocationManager",
+            "method": "getLastKnownLocation"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "f25af098735e199971ec609b5af446908b63f859e04b47edd187331a8e8e1bf7658a0d26dde742b8f12989611b5a8051aea7e87fb4cbe4885476ba7d122d0015",
+        "014b4e2e536d0f23dfefea6226932e25e76eaf0afa9ee7692f33a0573d6215080a74fabaad35daf0a5b639de554214290c67c802ac5aefd32469042f7ff069bf",
+        "6872a8d4b6d86182ae04be93e4681e3080358dd93cb86ea830edd4e664010342090bac47ffeb374c15fc806bca87a299e04713c0c1557c69a2fcadbff3b794ae",
+        "622821fb262951a2275c20b8fca4eac7c33a8044f0d984e054c3df4acf4da8a914058dc563d96f8f6985b1ac64d8cf93b1c54581e0c909a8011d69c6a740c739",
+        "e504a2d9ad661a9353844740a2c585a605243fe4bb29735bfbc21ebd608beea7b15463987092ad8f3a021b7a3c3af94a41b127d6538d0bf0870907d822ee8e6b",
+        "eb61a8e7dfc4ea33901803a669d6e8ef9d4a8cbb5217434208137f0b1b828f26bb49d07d92e7332a2b70903a0d206554de4300aac11070a02cf8d12e9ce53851",
+        "41e0d9f744570d9b1cb0225e2f93b01fc12c1cdc4b53e78203fbc62b53ef7160b80058d3dc6da930b40377af41421aea0317d8e970aa6d5ff3190d12a7ac7672"
+    ]
+}

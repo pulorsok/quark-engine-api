@@ -1,0 +1,28 @@
+{
+    "crime": "Steal Sensitive Information - Get info of SD cards and network ",
+    "x1_permission": [
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.ACCESS_NETWORK_STATE"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/os/Environment",
+            "method": "getExternalStorageDirectory"
+        },
+        {
+            "class": "Landroid/net/ConnectivityManager",
+            "method": "getNetworkInfo"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "94df58b777a539fa0574ab95fd4aa84c65c90977a0b9dfe21bf82544d9dd2a935b813ff2a3f85a9e749293309b6ce5459a3ec423870b737509eab0eaee50a5bf",
+        "7deee7286601890557a318986cf9642ed8426131147c4bbde8d5dc7651843a452b1bf3a7aef37048c110d4bee46e76fd4381fa0c29835350d2eeecc05fa60bd7",
+        "8612bbb29dc17e584d817b90475b098646ea756f159249af410071c400afa911865cd55cf9cec9f9c0db95b00734885863ab75b1bdfd0e0c73f60b4ac680a483",
+        "fd9a6b886e9e30e90ac364446d98934142c24fef525c445ae5ceee169fb7124a2e17bfdf05177ac5d22b8b944c7aa78f8c181845509708e0f0ea60bb2afdbb43",
+        "37290d8ba66e0b9f4f7398123c55c5a834e498aa030edb1109cb26b28d85ca2663a876c6cf7510a6ef1174b861905df76617fe7e2c7ab037d0f1539f26cf278e",
+        "c53fe1a510e3003fb4b2743c045efda8b6fdb05e0a05ceb71682080b9476acdf8fec0ae1f8863614400521a743ace0165f4675dbf01e67a88980f321e9683444",
+        "934573215329244f74ad7090604d4410732559ea0c981c466d6dee13a2ba6b8533d9d7171af6f5fb7ae07377a495cee8b77e5da1dc1eca68158b3c76395f8b1c",
+        "5751cfdf656f2a5ee021940c5448a77e5b921d1510d2abfa520a57d02c74821e0f5c2e4935bea2554c440072d32fc22bb8317a85dabbbc7c9cca9d1c077793c2"
+    ]
+}

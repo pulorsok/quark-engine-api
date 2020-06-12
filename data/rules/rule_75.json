@@ -1,0 +1,23 @@
+{
+    "crime": "Steal Sensitive Information - Get your location and SD cards info",
+    "x1_permission": [
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/telephony/TelephonyManager",
+            "method": "getCellLocation"
+        },
+        {
+            "class": "Landroid/os/Environment",
+            "method": "getExternalStorageDirectory"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "d3623a24648cdadcab189b2c7bec118a2aa63ec5f84ef002eeef44ad5789481c4927bcd76be38bb9920120d6093321b208ea443598edd5c099e3526eefcf1553",
+        "a13228c19303304968541917fad261b12a00646e49a37eb61c5232f37aa18d91d2af913e66f2785067c9910ae74d51aa0d146523c6c6419bc027ea3dbb81288b",
+        "4f60446b97ce44b297e17e334de6d870f5de38ef1d74b2557f3bf684178363d319a5d0e4147f4cc55784e79a8f4eb2de0b6448fc103f5266b8c78b8bd2bca783"
+    ]
+}

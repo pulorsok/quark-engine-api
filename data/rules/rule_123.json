@@ -1,0 +1,21 @@
+{
+    "crime": "Hotspot Detection - Scan active hotspots and get the last location of the device",
+    "x1_permission": [
+        "android.permission.CHANGE_WIFI_STATE",
+        "android.permission.ACCESS_COARSE_LOCATION"
+    ],
+    "x2n3n4_comb": [
+        {
+            "class": "Landroid/net/wifi/WifiManager",
+            "method": "startScan"
+        },
+        {
+            "class": "Landroid/location/LocationManager",
+            "method": "getLastKnownLocation"
+        }
+    ],
+    "yscore": 1,
+    "sample": [
+        "d3623a24648cdadcab189b2c7bec118a2aa63ec5f84ef002eeef44ad5789481c4927bcd76be38bb9920120d6093321b208ea443598edd5c099e3526eefcf1553"
+    ]
+}

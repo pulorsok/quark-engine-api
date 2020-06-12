@@ -48,7 +48,12 @@ class ApkAnalysis:
             rule_checker = RuleObject(rulepath)
 
             # Run the checker
-            data.run(rule_checker)
+            
+            try:
+                data.run(rule_checker)
+            except:
+                print("Error from analysis from rule: {}".format(single_rule))
+                pass
 
             data.show_summary_report(rule_checker)
             
@@ -85,11 +90,8 @@ class ApkAnalysis:
         report_path = REPORT_PATH + name
         with open( REPORT_PATH + name, "w+") as report_file:
             json.dump(json_report, report_file, indent=4)
-        print(json.dumps(json_report, indent=4))
+        
         report_file.close()
         
-        # If command --json output report by json
-
-        print(data.tb)
 
         return json_report

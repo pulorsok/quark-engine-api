@@ -135,7 +135,8 @@ def upload_apk():
             report = analysis.analysis()
 
             if report == "Error open apk":
-                return json()
+                return {"error": "Apk analysis failed"}
+
 
 
             report_tag = report["sample"]

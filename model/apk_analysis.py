@@ -109,6 +109,6 @@ class ApkAnalysis:
         ]
         for r in risks_list:
             if r in risk:
-                return risk
+                return r
 
         return "None Risk"

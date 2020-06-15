@@ -29,6 +29,7 @@ class ApkAnalysis:
         
 
 
+
     def analysis(self):
         
 
@@ -77,6 +78,8 @@ class ApkAnalysis:
         sha512 = FileHash("sha512")
         f_hash = sha512.hash_file(self.apk)
         path = "/Users/pock/quark/quark-engine-web/data/report/"
+        risk = self._check_risk(w.calculate())
+    
         json_report={
             "sample": f_hash,
             "apk-name": self.apk_name,
@@ -95,3 +98,17 @@ class ApkAnalysis:
         
 
         return json_report
+
+
+    def _check_risk(self, risk):
+        
+        risks_list = [
+            "Low Risk",
+            "Moderate Risk",
+            "High Risk"
+        ]
+        for r in risks_list:
+            if r in risk:
+                return risk
+
+        return "None Risk"

@@ -84,7 +84,7 @@ class ApkAnalysis:
             "sample": f_hash,
             "apk-name": self.apk_name,
             "size": os.path.getsize(self.apk),
-            "warnning": w.calculate(),
+            "warnning": risk,
             "total-score": data.score_sum,
             "crimes": json_crimes
         }

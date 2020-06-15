@@ -4,7 +4,7 @@ import json
 import sys
 from flask_flatpages import FlatPages
 from flask_frozen import Freezer
-from flask import Flask, abort
+from flask import Flask, abort, jsonify
 from flask import request
 from flask import render_template
 from flask import flash
@@ -20,7 +20,9 @@ from filehash import FileHash
 from model.apk_analysis import ApkAnalysis
 
 from werkzeug.utils import secure_filename
+import werkzeug
 
+from saveserver import current_milli_time, intWithCommas, measure_spent_time
 
 UPLOAD_FOLDER = "data/apk/"
 ALLOWED_EXTENSIONS = {'apk'}
@@ -43,11 +45,11 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@app.before_request
-def check():
+# @app.before_request
+# def check():
 
-    if request.host_url != "http://quark.xeo.tw/":
-        abort(401)
+#     # if request.host_url != "http://quark.xeo.tw/":
+#     #     abort(401)
 
 
 """ Router """
@@ -99,6 +101,7 @@ def upload_apk():
     print(request.files)
     if request.method == 'POST':
 
+        print("start parse file")
         # check if the post request has the file part
         if 'file' not in request.files:
             flash('No file part')
@@ -112,7 +115,7 @@ def upload_apk():
             flash('No selected file')
             print("No selected file")
             return redirect(request.url)
-        if file and allowed_file(file.filename):
+        if file:
             sha512 = FileHash("sha512")
             filename = secure_filename(file.filename)
             
@@ -122,31 +125,55 @@ def upload_apk():
                         os.path.join(app.config['UPLOAD_FOLDER'], f_hash))
             
 
-
             report_path = os.path.join(app.config['REPORT_FOLDER'], f_hash + ".json")
             if path.exists(report_path):
                 print("report exist") 
                 return redirect(url_for("json_report", tag=f_hash))
-
-
-
             
             analysis = ApkAnalysis(f_hash, filename)
             report = analysis.analysis()
 
+            # If analysis apk occure error
             if report == "Error open apk":
-                return {"error": "Apk analysis failed"}
+                return jsonify(
+                    status=0,
+                    message="Apk analysis failed"
+                )
+            
 
 
 
             report_tag = report["sample"]
-            # report_path = os.path.join(app.config['REPORT_FOLDER'], "report_" + report["sample"] + ".json")
-            # return send_file(report_path)
+
 
 
             return redirect(url_for("json_report", tag=report_tag))
             # return redirect(url_for('report_detail', tag=report["sample"]))
+        
+# @app.route('/upload_apk', methods=['POST'])
+# def upload_apk():
+#     print(request)
+#     print(request.files)
+#     if request.method == 'POST':
 
+#         app.logger.info('new request')
+#     def custom_stream_factory(total_content_length, filename, content_type, content_length=None):
+#         tmpfile = tempfile.NamedTemporaryFile('wb+', prefix='flaskapp')
+#         app.logger.info("start receiving file ... filename => " + str(tmpfile.name))
+#         return tmpfile
+
+#     ms = measure_spent_time()
+    
+#     stream,form,files = werkzeug.formparser.parse_form_data(request.environ, stream_factory=custom_stream_factory)
+#     total_size = 0
+    
+#     for fil in files.values():
+#         app.logger.info(" ".join(["saved form name", fil.name, "submitted as", fil.filename, "to temporary file", fil.stream.name]))
+#         total_size += os.path.getsize(fil.stream.name)
+#     mb_per_s = "%.1f" % ((total_size / (1024.0*1024.0)) / ((1.0+ms(raw=True))/1000.0))
+#     app.logger.info(" ".join([str(x) for x in ["handling POST request, spent", ms(), "ms.", mb_per_s, "MB/s.", "Number of files:", len(files.values())]]))
+#     process = psutil.Process(os.getpid())
+#     app.logger.info("memory usage: %.1f MiB" % (process.memory_info().rss / (1024.0*1024.0)))
 
 
 
@@ -156,10 +183,22 @@ def json_report(tag):
     file_path = os.path.join(app.root_path, 'data/report')
     filepath = os.path.join(file_path, name)
     
+    # If report file doesn't exist
     if not path.exists(filepath):
-        return "Report not exist"
+        return jsonify(
+            status=0,
+            message="Report not exist"
+        )
 
-    return send_file(filepath)
+
+    with open(filepath, "r") as report_f:
+        report = json.load(report_f)
+    
+    return jsonify(
+        status=1,
+        message="success",
+        report=report
+    )
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
@@ -169,4 +208,4 @@ if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == "build":
         freezer.freeze()
     else:
-        app.run(host="0.0.0.0", port=80)
+        app.run(debug=True, host="0.0.0.0", port=5000)

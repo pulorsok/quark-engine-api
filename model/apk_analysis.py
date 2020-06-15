@@ -44,6 +44,7 @@ class ApkAnalysis:
 
         json_crimes = []
         for single_rule in tqdm(rules_list):
+            print("input rule: {}".format(single_rule))
             rulepath = os.path.join(RULE_PATH, single_rule)
             rule_checker = RuleObject(rulepath)
 
@@ -53,8 +54,7 @@ class ApkAnalysis:
                 data.run(rule_checker)
             except:
                 print("Error from analysis from rule: {}".format(single_rule))
-                pass
-
+                continue
             data.show_summary_report(rule_checker)
             
             crime, confidence, score, weight = data.get_json_report(rule_checker)

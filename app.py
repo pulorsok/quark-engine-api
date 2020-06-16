@@ -2,6 +2,8 @@ import os
 from os import path
 import json
 import sys
+import uuid
+
 from flask_flatpages import FlatPages
 from flask_frozen import Freezer
 from flask import Flask, abort, jsonify
@@ -16,6 +18,7 @@ from flask import send_file
 # from flask_cors import CORS, cross_origin
 
 from filehash import FileHash
+
 
 from model.apk_analysis import ApkAnalysis
 
@@ -97,7 +100,6 @@ def upload_apk():
     print(request.files)
     if request.method == 'POST':
 
-        print("start parse file")
         # check if the post request has the file part
         if 'file' not in request.files:
             print("No file part")
@@ -126,14 +128,15 @@ def upload_apk():
 
         
         sha512 = FileHash("sha512")
-        filename = secure_filename(file.filename)
-        print(filename)
+        filename = str(uuid.uuid4())
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
         # Storing apk in server
         try:
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            f_hash = sha512.hash_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            os.rename(os.path.join(app.config['UPLOAD_FOLDER'], filename), 
-                        os.path.join(app.config['UPLOAD_FOLDER'], f_hash))
+            file.save(file_path)
+            f_hash = sha512.hash_file(file_path)
+            # os.rename(os.path.join(app.config['UPLOAD_FOLDER'], filename), 
+            #             os.path.join(app.config['UPLOAD_FOLDER'], f_hash))
             
         except:
             print("Apk store failed")
@@ -144,10 +147,11 @@ def upload_apk():
                 report=None
             )
         
-    
-        check = monitor.get_apk_progress(f_hash)
         for work in monitor.get_work_list():
             print(work)
+        check = monitor.get_apk_progress(f_hash)
+        print("check: {}".format(check))
+        
         if check:
             print("Current apk on progress: {}\nprogress: {}\nspend time: {}".format(
                 check["apk"],
@@ -172,7 +176,7 @@ def upload_apk():
 
         
         # Start analysis apk
-        analysis = ApkAnalysis(f_hash, filename)
+        analysis = ApkAnalysis(file_path, file.filename, f_hash)
         monitor.update_apk_progress(f_hash, "analyzing...")
         report = analysis.analysis()
         monitor.remove_apk_process(f_hash)
@@ -180,12 +184,16 @@ def upload_apk():
 
         # If analysis apk occure error
         if report == "Error open apk":
-            print("Failed parse apk: {}".format(filename))
+            print("Failed parse apk: {}".format(f_hash))
             return jsonify(
                 status=2,
                 message="Apk analysis failed"
             )
         
+        # Store analysis success apk
+        file.save(os.path.join(app.config['APK_FOLDER'], f_hash))
+
+
         report_tag = report["sample"]
         return redirect(url_for("json_report", tag=report_tag))
 

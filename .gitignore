@@ -109,6 +109,7 @@ celerybeat.pid
 # Data stuff
 data/apk/*
 data/report/*
+data/apk_temp/*
 
 
 

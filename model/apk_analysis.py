@@ -21,9 +21,9 @@ REPORT_PATH = "data/report/"
 
 class ApkAnalysis:
     
-    def __init__(self, apk, apk_name):
-        path = os.path.join(APK_PATH, apk)
-        self.apk_hash = apk
+    def __init__(self, path, apk_name, apk_hash):
+
+        self.apk_hash = apk_hash
         self.apk = path
         self.apk_name = apk_name
         self.data = None
@@ -31,33 +31,6 @@ class ApkAnalysis:
         self.start_time = time.time()
         self.progress = ""
 
-    def get_analysis_progress(self):
-        """
-            Return current progress of apk analysis
-        """
-        if self.progress == "":
-            self.progress = "Not in progress"
-
-        return self.progress
-
-    def get_up_time(self):
-        """
-            Returns the number of seconds since the program started
-        """
-        return time.time() - self.start_time
-
-    def get_analyzing_apk(self):
-        """
-            Return the apk hash in this analysis process
-        """
-        return self.apk
-
-    def update_analysis_progress(self, progress):
-        """
-            Update and return current progress of analysis to self.progress
-        """
-        self.progress = progress
-        
 
     def analysis(self):
         

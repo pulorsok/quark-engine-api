@@ -13,6 +13,8 @@ class AnalysisMonitor:
         """
             Append apk analysis process into process list
         """
+        if self.check_apk_on_process(apk):
+            return False
         start_time = time.time()
         work = {
             "apk": apk,
@@ -20,6 +22,7 @@ class AnalysisMonitor:
             "time": start_time
         }
         self.work_list.append(work)
+        return True
 
     def update_apk_progress(self, apk, progress):
         """
@@ -30,26 +33,27 @@ class AnalysisMonitor:
                 work["progress"] == progress
                 work["time"] == time.time() - work["time"]
                 return True
-            return False
+        return False
 
     def check_apk_on_process(self, apk):
         """
             Check if the given apk is in analysis process
         """ 
-        for process in self.process:
-            if process["apk"] == apk:
+        for work in self.work_list:
+            if work["apk"] == apk:
                 return True
-            return False
+        return False
     
     def get_apk_progress(self, apk):
         """
             Return current apk progress in work_list
         """
         for work in self.work_list:
+            print("compare\n{}:{}".format(apk, work["apk"]))
             if work["apk"] == apk:
                 work["time"] == time.time() - work["time"]
                 return work
-            return False
+        return False
 
     def remove_apk_process(self, apk):
         """

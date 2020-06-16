@@ -30,8 +30,6 @@ ALLOWED_EXTENSIONS = {'apk'}
 app = Flask(__name__)
 
 
-# CORS(app, resource={r"/.*": {"origins": ["http://quark.xeo.tw"]}})
-
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['REPORT_FOLDER'] = "data/report/"
 
@@ -45,11 +43,6 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-# @app.before_request
-# def check():
-
-#     # if request.host_url != "http://quark.xeo.tw/":
-#     #     abort(401)
 
 
 """ Router """
@@ -104,101 +97,121 @@ def upload_apk():
         print("start parse file")
         # check if the post request has the file part
         if 'file' not in request.files:
-            flash('No file part')
             print("No file part")
-            return redirect(request.url)
+            return jsonify(
+                status=0,
+                message="File post error"
+            )
+
         file = request.files['file']
 
         # if user does not select file, browser also
         # submit an empty part without filename
         if file.filename == '':
-            flash('No selected file')
             print("No selected file")
-            return redirect(request.url)
-        if file:
-            sha512 = FileHash("sha512")
-            filename = secure_filename(file.filename)
-            
+            return jsonify(
+                status=6,
+                message="No selected file"
+            )
+
+        if not file:
+            print("File upload failed")
+            return jsonify(
+                status=3,
+                message="File upload failed"
+            )
+
+        
+        sha512 = FileHash("sha512")
+        filename = secure_filename(file.filename)
+        
+        # Storing apk in server
+        try:
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             f_hash = sha512.hash_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             os.rename(os.path.join(app.config['UPLOAD_FOLDER'], filename), 
                         os.path.join(app.config['UPLOAD_FOLDER'], f_hash))
+        except:
+            print("Apk store failed")
+            print("Apk name: {}\n Apk hash: {}".format(filename, f_hash))
+            return jsonify(
+                status=3,
+                message="File upload failed"
+            )
             
-
-            report_path = os.path.join(app.config['REPORT_FOLDER'], f_hash + ".json")
-            if path.exists(report_path):
-                print("report exist") 
-                return redirect(url_for("json_report", tag=f_hash))
-            
-            analysis = ApkAnalysis(f_hash, filename)
-            report = analysis.analysis()
-
-            # If analysis apk occure error
-            if report == "Error open apk":
-                return jsonify(
-                    status=0,
-                    message="Apk analysis failed"
-                )
-            
-
-
-
-            report_tag = report["sample"]
-
-
-
-            return redirect(url_for("json_report", tag=report_tag))
-            # return redirect(url_for('report_detail', tag=report["sample"]))
         
-# @app.route('/upload_apk', methods=['POST'])
-# def upload_apk():
-#     print(request)
-#     print(request.files)
-#     if request.method == 'POST':
+        
 
-#         app.logger.info('new request')
-#     def custom_stream_factory(total_content_length, filename, content_type, content_length=None):
-#         tmpfile = tempfile.NamedTemporaryFile('wb+', prefix='flaskapp')
-#         app.logger.info("start receiving file ... filename => " + str(tmpfile.name))
-#         return tmpfile
+        report_path = os.path.join(app.config['REPORT_FOLDER'], f_hash + ".json")
 
-#     ms = measure_spent_time()
-    
-#     stream,form,files = werkzeug.formparser.parse_form_data(request.environ, stream_factory=custom_stream_factory)
-#     total_size = 0
-    
-#     for fil in files.values():
-#         app.logger.info(" ".join(["saved form name", fil.name, "submitted as", fil.filename, "to temporary file", fil.stream.name]))
-#         total_size += os.path.getsize(fil.stream.name)
-#     mb_per_s = "%.1f" % ((total_size / (1024.0*1024.0)) / ((1.0+ms(raw=True))/1000.0))
-#     app.logger.info(" ".join([str(x) for x in ["handling POST request, spent", ms(), "ms.", mb_per_s, "MB/s.", "Number of files:", len(files.values())]]))
-#     process = psutil.Process(os.getpid())
-#     app.logger.info("memory usage: %.1f MiB" % (process.memory_info().rss / (1024.0*1024.0)))
+        # Check if report of the apk exist
+        if path.exists(report_path):
+            print("Report exist") 
+            print("Response report for apk: {}".format(f_hash))
+            return redirect(url_for("json_report", tag=f_hash))
+
+        
+        # Start analysis apk
+        analysis = ApkAnalysis(f_hash, filename)
+        report = analysis.analysis()
+
+        # If analysis apk occure error
+        if report == "Error open apk":
+            print("Failed parse apk: {}".format(filename))
+            return jsonify(
+                status=2,
+                message="Apk analysis failed"
+            )
+        
+        report_tag = report["sample"]
+        return redirect(url_for("json_report", tag=report_tag))
 
 
 
 @app.route('/json_report/<path:tag>', methods=['GET', 'POST'])
 def json_report(tag):
+
+    # Open report by apk hash
     name = tag + ".json"
     file_path = os.path.join(app.root_path, 'data/report')
     filepath = os.path.join(file_path, name)
     
-    # If report file doesn't exist
+    # Check report exist
     if not path.exists(filepath):
+        print("Access report not exist, haven't upload apk yet")
         return jsonify(
-            status=0,
+            status=4,
             message="Report not exist"
         )
 
-
+    # Read report
     with open(filepath, "r") as report_f:
         report = json.load(report_f)
     
-    return jsonify(
-        status=1,
-        message="success",
-        report=report
-    )
+    # Check analysis status
+    analysis_status = report["analysis_status"]
+    
+    if analysis_status == 0:
+        result = {
+            "status": analysis_status,
+            "message": "Apk analysis failed cause unknown error",
+            "report": None
+        }
+
+    if analysis_status == 1:
+        result = {
+            "status": analysis_status,
+            "message": "Analysis success",
+            "report": report
+        }
+
+    if analysis_status == 2:
+        result = {
+            "status": analysis_status,
+            "message": "Apk parse failed",
+            "report": None
+        }
+    return jsonify(result)
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'

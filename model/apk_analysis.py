@@ -6,15 +6,14 @@ import click
 import json
 from tqdm import tqdm
 
-from filehash import FileHash
-
-from prettytable import PrettyTable
 
 from quark.Objects.ruleobject import RuleObject
 from quark.logo import logo
 from quark.Objects.xrule import XRule
 from quark.utils.out import print_success, print_info, print_warning
 from quark.utils.weight import Weight
+
+import time
 
 APK_PATH = "data/apk/"
 RULE_PATH = "data/rules/"
@@ -24,10 +23,41 @@ class ApkAnalysis:
     
     def __init__(self, apk, apk_name):
         path = os.path.join(APK_PATH, apk)
+        self.apk_hash = apk
         self.apk = path
         self.apk_name = apk_name
         self.data = None
         self.json_crimes = []
+        self.start_time = time.time()
+        self.progress = ""
+
+    def get_analysis_progress(self):
+        """
+            Return current progress of apk analysis
+        """
+        if self.progress == "":
+            self.progress = "Not in progress"
+
+        return self.progress
+
+    def get_up_time(self):
+        """
+            Returns the number of seconds since the program started
+        """
+        return time.time() - self.start_time
+
+    def get_analyzing_apk(self):
+        """
+            Return the apk hash in this analysis process
+        """
+        return self.apk
+
+    def update_analysis_progress(self, progress):
+        """
+            Update and return current progress of analysis to self.progress
+        """
+        self.progress = progress
+        
 
     def analysis(self):
         
@@ -90,25 +120,27 @@ class ApkAnalysis:
 
     def generate_report(self, result):
 
-        sha512 = FileHash("sha512")
-        f_hash = sha512.hash_file(self.apk)
-
-
         if not result:
             json_report = {
-                "sample": f_hash,
+                "sample": self.apk_hash,
                 "size": os.path.getsize(self.apk),
                 "apk-name": self.apk_name,
                 "analysis_status": 2,
             }
-            return
+            with open( REPORT_PATH + name, "w+") as report_file:
+                json.dump(json_report, report_file, indent=4)
+        
+            report_file.close()
+
+            return json_report
+            
         
 
         w = Weight(self.data.score_sum, self.data.weight_sum)
         risk = self._check_risk(w.calculate())
 
         json_report={
-            "sample": f_hash,
+            "sample": self.apk_hash,
             "apk-name": self.apk_name,
             "size": os.path.getsize(self.apk),
             "warnning": risk,
@@ -116,7 +148,7 @@ class ApkAnalysis:
             "crimes": self.json_crimes,
             "analysis_status": 1,
         }
-        name = f_hash + ".json"
+        name = self.apk_hash + ".json"
         report_path = REPORT_PATH + name
         with open( REPORT_PATH + name, "w+") as report_file:
             json.dump(json_report, report_file, indent=4)

@@ -19,20 +19,23 @@ from filehash import FileHash
 
 from model.apk_analysis import ApkAnalysis
 
+from utilities.quark_monitor import AnalysisMonitor
+
 from werkzeug.utils import secure_filename
 import werkzeug
 
 from saveserver import current_milli_time, intWithCommas, measure_spent_time
 
-UPLOAD_FOLDER = "data/apk/"
 ALLOWED_EXTENSIONS = {'apk'}
 
 app = Flask(__name__)
 
 
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['UPLOAD_FOLDER'] = "data/apk_temp/"
 app.config['REPORT_FOLDER'] = "data/report/"
+app.config['APK_FOLDER'] = "data/apk/"
 
+monitor = AnalysisMonitor()
 pages = FlatPages(app)
 freezer = Freezer(app)
 
@@ -124,22 +127,39 @@ def upload_apk():
         
         sha512 = FileHash("sha512")
         filename = secure_filename(file.filename)
-        
+        print(filename)
         # Storing apk in server
         try:
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             f_hash = sha512.hash_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             os.rename(os.path.join(app.config['UPLOAD_FOLDER'], filename), 
                         os.path.join(app.config['UPLOAD_FOLDER'], f_hash))
+            
         except:
             print("Apk store failed")
             print("Apk name: {}\n Apk hash: {}".format(filename, f_hash))
             return jsonify(
                 status=3,
-                message="File upload failed"
+                message="File upload failed",
+                report=None
             )
-            
         
+    
+        check = monitor.get_apk_progress(f_hash)
+        for work in monitor.get_work_list():
+            print(work)
+        if check:
+            print("Current apk on progress: {}\nprogress: {}\nspend time: {}".format(
+                check["apk"],
+                check["progress"],
+                check["time"]
+            ))
+            return jsonify(
+                stauts=7,
+                message="Apk on analysis progress",
+                report=None
+            )
+        monitor.add_process(f_hash)
         
 
         report_path = os.path.join(app.config['REPORT_FOLDER'], f_hash + ".json")
@@ -153,7 +173,10 @@ def upload_apk():
         
         # Start analysis apk
         analysis = ApkAnalysis(f_hash, filename)
+        monitor.update_apk_progress(f_hash, "analyzing...")
         report = analysis.analysis()
+        monitor.remove_apk_process(f_hash)
+        
 
         # If analysis apk occure error
         if report == "Error open apk":

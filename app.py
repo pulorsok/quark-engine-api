@@ -115,7 +115,7 @@ def upload_apk():
         if file.filename == '':
             print("No selected file")
             return jsonify(
-                status=6,
+                status=3,
                 message="No selected file"
             )
 

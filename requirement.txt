@@ -46,4 +46,4 @@ traitlets==4.3.3
 virtualenv==20.0.21
 virtualenv-clone==0.5.4
 wcwidth==0.2.4
-Werkzeug==1.0.1
+Werkzeug==2.2.3
